@@ -1,0 +1,132 @@
+CCS PCH C Compiler, Version 5.008, 5967               02-abr-15 16:37
+
+               Filename:   D:\Projetos\FCM8201\main.lst
+
+               ROM used:   160 bytes (0%)
+                           Largest free fragment is 32608
+               RAM used:   5 (0%) at main() level
+                           8 (1%) worst case
+               Stack used: 1 locations
+               Stack size: 31
+
+*
+0000:  GOTO   0038
+.................... /* 
+....................  * main.c 
+....................  * 
+....................  *  Created on: 02/04/2015 
+....................  *      Author: cuki 
+....................  */ 
+....................  
+.................... #include <18F25K22.h> 
+.................... //////// Standard Header file for the PIC18F25K22 device //////////////// 
+.................... #device PIC18F25K22 
+....................  
+.................... #list 
+....................  
+....................  
+.................... #fuses HSH, NOPLLEN 
+....................  
+.................... #use delay(clock=15MHz) 
+*
+000E:  CLRF   FEA
+0010:  MOVLW  06
+0012:  MOVWF  FE9
+0014:  MOVF   FEF,W
+0016:  BZ    0034
+0018:  MOVLW  04
+001A:  MOVWF  01
+001C:  CLRF   00
+001E:  DECFSZ 00,F
+0020:  BRA    001E
+0022:  DECFSZ 01,F
+0024:  BRA    001C
+0026:  MOVLW  DC
+0028:  MOVWF  00
+002A:  DECFSZ 00,F
+002C:  BRA    002A
+002E:  NOP   
+0030:  DECFSZ FEF,F
+0032:  BRA    0018
+0034:  GOTO   0092 (RETURN)
+.................... #use rs232(baud=9600, uart1) 
+*
+0004:  BTFSS  F9E.4
+0006:  BRA    0004
+0008:  MOVWF  FAD
+000A:  GOTO   007E (RETURN)
+.................... #use spi(MASTER, SPI1,  BAUD=9600, MODE=1, FORCE_HW) 
+....................  
+.................... int main(void) { 
+*
+0038:  CLRF   FF8
+003A:  BCF    FD0.7
+003C:  BSF    FB8.3
+003E:  MOVLW  86
+0040:  MOVWF  FAF
+0042:  MOVLW  01
+0044:  MOVWF  FB0
+0046:  MOVLW  A6
+0048:  MOVWF  FAC
+004A:  MOVLW  90
+004C:  MOVWF  FAB
+004E:  BCF    FC6.5
+0050:  MOVLW  00
+0052:  MOVWF  FC7
+0054:  MOVLW  FF
+0056:  MOVWF  FC8
+0058:  MOVLW  2A
+005A:  MOVWF  FC6
+005C:  BCF    F94.5
+005E:  BSF    F94.4
+0060:  BCF    F94.3
+0062:  MOVF   FC1,W
+0064:  ANDLW  F0
+0066:  MOVWF  FC1
+0068:  MOVLW  00
+006A:  MOVLB  F
+006C:  MOVWF  x38
+006E:  MOVWF  x39
+0070:  MOVWF  x3A
+0072:  CLRF   F77
+0074:  CLRF   F78
+0076:  CLRF   F79
+....................  
+.................... 	while (true) { 
+....................  
+.................... 		putc(0x55); 
+0078:  MOVLW  55
+007A:  MOVLB  0
+007C:  BRA    0004
+.................... 		spi_write(0x55); 
+007E:  MOVF   FC9,W
+0080:  MOVLW  55
+0082:  MOVWF  FC9
+0084:  RRCF   FC7,W
+0086:  BNC   0084
+.................... 		delay_ms(1000); 
+0088:  MOVLW  04
+008A:  MOVWF  05
+008C:  MOVLW  FA
+008E:  MOVWF  06
+0090:  BRA    000E
+0092:  DECFSZ 05,F
+0094:  BRA    008C
+0096:  MOVLB  F
+0098:  BRA    0078
+.................... 	} 
+....................  
+.................... 	return 0; 
+009A:  MOVLW  00
+009C:  MOVWF  01
+.................... } 
+009E:  SLEEP 
+
+Configuration Fuses:
+   Word  1: E200   HSH NOPLLEN PRIMARY FCMEN IESO
+   Word  2: 3C1E   PUT BROWNOUT BORV19 NOWDT WDT32768
+   Word  3: BF00   CCP2C1 PBADEN CCP3B5 HFOFST TIMER3C0 CCP2B5 MCLR
+   Word  4: 0081   STVREN NOLVP NOXINST NODEBUG
+   Word  5: C00F   NOPROTECT NOCPB NOCPD
+   Word  6: E00F   NOWRT NOWRTC NOWRTB NOWRTD
+   Word  7: 400F   NOEBTR NOEBTRB
