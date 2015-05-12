@@ -1,11 +1,11 @@
-CCS PCH C Compiler, Version 5.008, 5967               02-abr-15 16:37
+CCS PCH C Compiler, Version 5.008, 5967               12-mai-15 12:07
 
                Filename:   D:\Projetos\FCM8201\main.lst
 
                ROM used:   160 bytes (0%)
                            Largest free fragment is 32608
                RAM used:   5 (0%) at main() level
-                           8 (1%) worst case
+                           6 (0%) worst case
                Stack used: 1 locations
                Stack size: 31
 
@@ -54,8 +54,7 @@ CCS PCH C Compiler, Version 5.008, 5967               02-abr-15 16:37
 0004:  BTFSS  F9E.4
 0006:  BRA    0004
 0008:  MOVWF  FAD
-000A:  GOTO   007E (RETURN)
-.................... #use spi(MASTER, SPI1,  BAUD=9600, MODE=1, FORCE_HW) 
+000A:  GOTO   007A (RETURN)
 ....................  
 .................... int main(void) { 
 *
@@ -70,40 +69,44 @@ CCS PCH C Compiler, Version 5.008, 5967               02-abr-15 16:37
 0048:  MOVWF  FAC
 004A:  MOVLW  90
 004C:  MOVWF  FAB
-004E:  BCF    FC6.5
-0050:  MOVLW  00
-0052:  MOVWF  FC7
-0054:  MOVLW  FF
-0056:  MOVWF  FC8
-0058:  MOVLW  2A
-005A:  MOVWF  FC6
-005C:  BCF    F94.5
-005E:  BSF    F94.4
-0060:  BCF    F94.3
-0062:  MOVF   FC1,W
-0064:  ANDLW  F0
-0066:  MOVWF  FC1
-0068:  MOVLW  00
-006A:  MOVLB  F
-006C:  MOVWF  x38
-006E:  MOVWF  x39
-0070:  MOVWF  x3A
-0072:  CLRF   F77
-0074:  CLRF   F78
-0076:  CLRF   F79
+004E:  MOVF   FC1,W
+0050:  ANDLW  F0
+0052:  MOVWF  FC1
+0054:  MOVLW  00
+0056:  MOVLB  F
+0058:  MOVWF  x38
+005A:  MOVWF  x39
+005C:  MOVWF  x3A
+005E:  CLRF   F77
+0060:  CLRF   F78
+0062:  CLRF   F79
+....................  
+.................... //	setup_spi(SPI_MASTER | SPI_H_TO_L | SPI_CLK_DIV_4); 
+.................... 	setup_spi(SPI_MASTER | SPI_H_TO_L | SPI_CLK_DIV_16); 
+0064:  BCF    FC6.5
+0066:  BCF    F94.5
+0068:  BSF    F94.4
+006A:  BCF    F94.3
+006C:  MOVLW  31
+006E:  MOVWF  FC6
+0070:  MOVLW  40
+0072:  MOVWF  FC7
 ....................  
 .................... 	while (true) { 
 ....................  
 .................... 		putc(0x55); 
-0078:  MOVLW  55
-007A:  MOVLB  0
-007C:  BRA    0004
+0074:  MOVLW  55
+0076:  MOVLB  0
+0078:  BRA    0004
 .................... 		spi_write(0x55); 
-007E:  MOVF   FC9,W
-0080:  MOVLW  55
-0082:  MOVWF  FC9
-0084:  RRCF   FC7,W
-0086:  BNC   0084
+007A:  MOVF   FC9,W
+007C:  MOVLW  55
+007E:  MOVWF  FC9
+0080:  RRCF   FC7,W
+0082:  BNC   0080
+.................... 		output_toggle(PIN_B0); 
+0084:  BCF    F93.0
+0086:  BTG    F8A.0
 .................... 		delay_ms(1000); 
 0088:  MOVLW  04
 008A:  MOVWF  05
@@ -113,7 +116,7 @@ CCS PCH C Compiler, Version 5.008, 5967               02-abr-15 16:37
 0092:  DECFSZ 05,F
 0094:  BRA    008C
 0096:  MOVLB  F
-0098:  BRA    0078
+0098:  BRA    0074
 .................... 	} 
 ....................  
 .................... 	return 0; 

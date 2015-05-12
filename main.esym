@@ -1,7 +1,7 @@
 D G "__PCH__" 0 0 ""5.008""
 D G "__DEVICE__" 0 0 ""
-D G "__DATE__" 0 0 ""02-abr-15""
-D G "__TIME__" 0 0 ""16:37:01"" "* main.c"
+D G "__DATE__" 0 0 ""12-mai-15""
+D G "__TIME__" 0 0 ""12:07:12"" "* main.c"
 c L "set_tris_a" 0 1 1 "*"
 c L "set_tris_a" 0 1 1 "*"
 c L "set_tris_a" 1 1 22 "FUNCTION"
@@ -1034,7 +1034,7 @@ d G "INT_RB4" 1 966 "0x110F208"
 d G "INT_RB5" 1 967 "0x120F208"
 d G "INT_RB6" 1 968 "0x140F208"
 d G "INT_RB7" 1 969 "0x180F208"
-F G "main" 0 16 "int8()" `684 
+F G "main" 0 15 "int8()" `682  "setup_spi(SPI_MASTER | SPI_H_TO_L | SPI_CLK_DIV_4);"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 1
@@ -1187,6 +1187,3 @@ F B "gets" 1 3
 F B "kbhit" 0 1
 F B "set_uart_speed" 1 3
 F B "setup_uart" 1 3
-F B "spi_xfer" 0 3
-F B "spi_speed" 1 3
-F B "spi_init" 1 2
